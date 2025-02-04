@@ -1,5 +1,4 @@
-package org.example;
-
+package pageobjects;
 
 import org.openqa.selenium.*;
 
@@ -14,7 +13,7 @@ public class OrderPage {
     //Локатор поля ввода станции метро
     private final By deliveryMetroStation = By.xpath(".//input[@placeholder='* Станция метро']");
     //Локатор списка станций метро
-    private final By selectMetroStation = By.xpath(".//*[@class='Order_SelectOption__82bhS select-search__option' and @value='3']");
+    private final By selectMetroStation = By.xpath(".//*[@class='Order_SelectOption__82bhS select-search__option' and @value='8']");
     //Локатор поля ввода телефона
     private final By phoneNumber = By.xpath(".//input[@placeholder='* Телефон: на него позвонит курьер']");
     //Локатор кнопки "Далее"
