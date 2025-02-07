@@ -39,15 +39,12 @@ public class OrdersListTests extends BaseTest {
     public void testOrderHeaderButton() {
         MainPage mainPage = new MainPage(driver);
         mainPage.pushHeaderOrderButton();
-
         OrderPage orderPage = new OrderPage(driver);
         orderPage.order(firstName, lastName, address, phone);
-
         RentPage rentPage = new RentPage(driver);
         rentPage.rent(startDateRent, comments);
-
         assertTrue(rentPage.checkModalWindowEnabled());
-        driver.close();
+        driver.navigate().back();
     }
 
     //Заказ через кнопку в серелине страницы
@@ -56,14 +53,11 @@ public class OrdersListTests extends BaseTest {
         MainPage mainPage = new MainPage(driver);
         mainPage.scrollToPushOrderButton();
         mainPage.pushOrderButton();
-
         OrderPage orderPage = new OrderPage(driver);
         orderPage.order(firstName, lastName, address, phone);
-
         RentPage rentPage = new RentPage(driver);
         rentPage.rent(startDateRent, comments);
-
         assertTrue(rentPage.checkModalWindowEnabled());
-        driver.close();
+        driver.navigate().back();
     }
 }

@@ -44,12 +44,17 @@ public class MainPage {
 
 
     public void pushHeaderOrderButton() {
-        driver.findElement(headerOrderButton).click();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(headerOrderButton));
+        System.out.println("Найденный элемент: " + element);
+        element.click();
     }
 
     public void pushOrderButton() {
-        driver.findElement(orderButton).click();
+        WebElement element = driver.findElement(orderButton);
+        ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
     }
+
 
     public void scrollToPushOrderButton() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
