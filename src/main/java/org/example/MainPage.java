@@ -59,7 +59,7 @@ public class MainPage {
     }
 
     public void scrollPageToQuestionsAboutImportant() {
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, 10);
         WebElement lastQuestionArrow = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(questionArrayButtons[7])));
         System.out.println("Найденный элемент: " + lastQuestionArrow);
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", lastQuestionArrow);
