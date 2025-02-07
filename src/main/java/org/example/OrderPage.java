@@ -2,7 +2,7 @@ package org.example;
 
 import org.openqa.selenium.*;
 
-public class OrderPage {s
+public class OrderPage {
     private WebDriver driver;
     //Локатор поля ввода имени
     private final By firstName = By.xpath(".//input[@placeholder='* Имя']");
