@@ -39,5 +39,6 @@ public class QuestionsTest extends BaseTest {
         mainPage.pushQuestionButton(questionLocator);
         String actualAnswerText = driver.findElement(By.id(answerLocator)).getText();
         assertEquals("Проверьте текст", answerText, actualAnswerText);
+        driver.close();
     }
 }

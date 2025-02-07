@@ -52,17 +52,21 @@ public class MainPage {
     }
 
     public void scrollToPushOrderButton() {
-        WebElement element = driver.findElement(orderButton);
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(orderButton));
+        System.out.println("Найденный элемент: " + element);
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
     }
 
     public void scrollPageToQuestionsAboutImportant() {
-        WebElement lastQuestionArrow = driver.findElement(By.id(questionArrayButtons[7]));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement lastQuestionArrow = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id(questionArrayButtons[7])));
+        System.out.println("Найденный элемент: " + lastQuestionArrow);
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", lastQuestionArrow);
     }
 
     public void pushQuestionButton(String questionButtonLocator) {
-        new WebDriverWait(driver, Duration.ofSeconds(10))
+        new WebDriverWait(driver, 10)
                 .until(ExpectedConditions.elementToBeClickable(By.id(questionButtonLocator)));
         driver.findElement(By.id(questionButtonLocator)).click();
     }
