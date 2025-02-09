@@ -1,7 +1,7 @@
 
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import org.junit.After;
+import org.junit.Before;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -10,19 +10,19 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
-    protected static WebDriver driver;
-    private static final By cookieButton = By.id("rcc-confirm-button");
-    private static final String URL = "https://qa-scooter.praktikum-services.ru/";
-    @BeforeClass
-    public static void startUp() {
-      //  System.setProperty("webdriver.chrome.driver", "/Users/borisz/chromeWebDriver");
+    protected  WebDriver driver;
+    private  final By cookieButton = By.id("rcc-confirm-button");
+    private  final String URL = "https://qa-scooter.praktikum-services.ru/";
+    @Before
+    public  void startUp() {
         driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.get(URL);
         driver.findElement(cookieButton).click();
     }
-    @AfterClass
-    public static void teardown() {
+    @After
+    public  void teardown() {
         driver.quit();
     }
+
 }

@@ -44,7 +44,7 @@ public class OrdersListTests extends BaseTest {
         RentPage rentPage = new RentPage(driver);
         rentPage.rent(startDateRent, comments);
         assertTrue(rentPage.checkModalWindowEnabled());
-        driver.navigate().back();
+ //       driver.navigate().back();
     }
 
     //Заказ через кнопку в серелине страницы
@@ -58,6 +58,6 @@ public class OrdersListTests extends BaseTest {
         RentPage rentPage = new RentPage(driver);
         rentPage.rent(startDateRent, comments);
         assertTrue(rentPage.checkModalWindowEnabled());
-        driver.navigate().back();
+ //       driver.navigate().back();
     }
 }
