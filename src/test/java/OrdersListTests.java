@@ -1,15 +1,18 @@
-
 import org.example.MainPage;
 import org.example.OrderPage;
+import org.example.PopUpPage;
 import org.example.RentPage;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
+import java.util.function.Consumer;
+
 import static org.junit.Assert.assertTrue;
 
 @RunWith(Parameterized.class)
 public class OrdersListTests extends BaseTest {
+    private final String orderCompletedHeader = "Заказ оформлен";
     private final String firstName;
     private final String lastName;
     private final String address;
@@ -17,14 +20,13 @@ public class OrdersListTests extends BaseTest {
     private final String startDateRent;
     private final String comments;
 
-    public OrdersListTests(String firstName, String lastName, String deliveryAddress, String phone, String startDate, String comments) {
-        this.startDateRent = startDate;
-        this.comments = comments;
+    public OrdersListTests(String firstName, String lastName, String address, String phone, String startDateRent, String comments) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.address = deliveryAddress;
+        this.address = address;
         this.phone = phone;
-
+        this.startDateRent = startDateRent;
+        this.comments = comments;
     }
 
     @Parameterized.Parameters
@@ -37,27 +39,30 @@ public class OrdersListTests extends BaseTest {
 
     @Test
     public void testOrderHeaderButton() {
-        MainPage mainPage = new MainPage(driver);
-        mainPage.pushHeaderOrderButton();
-        OrderPage orderPage = new OrderPage(driver);
-        orderPage.order(firstName, lastName, address, phone);
-        RentPage rentPage = new RentPage(driver);
-        rentPage.rent(startDateRent, comments);
-        assertTrue(rentPage.checkModalWindowEnabled());
- //       driver.navigate().back();
+        placeOrder(MainPage::pushHeaderOrderButton, false);
     }
 
-    //Заказ через кнопку в серелине страницы
     @Test
     public void testOrderMiddlePageButton() {
+        placeOrder(MainPage::PushBottomOrderButton, true);
+    }
+
+    private void placeOrder(Consumer<MainPage> orderButtonAction, boolean needsScroll) {
         MainPage mainPage = new MainPage(driver);
-        mainPage.scrollToPushOrderButton();
-        mainPage.pushOrderButton();
+        if (needsScroll) {
+            mainPage.scrollToPushOrderButton();
+        }
+        orderButtonAction.accept(mainPage);
+
         OrderPage orderPage = new OrderPage(driver);
         orderPage.order(firstName, lastName, address, phone);
+
         RentPage rentPage = new RentPage(driver);
         rentPage.rent(startDateRent, comments);
-        assertTrue(rentPage.checkModalWindowEnabled());
- //       driver.navigate().back();
+
+        PopUpPage popUpPage = new PopUpPage(driver);
+        popUpPage.clickOnYes();
+
+        assertTrue(popUpPage.getHeader().contains(orderCompletedHeader));
     }
 }
