@@ -44,7 +44,7 @@ public class OrdersListTests extends BaseTest {
 
     @Test
     public void testOrderMiddlePageButton() {
-        placeOrder(MainPage::PushBottomOrderButton, true);
+        placeOrder(MainPage::pushBottomOrderButton, true);
     }
 
     private void placeOrder(Consumer<MainPage> orderButtonAction, boolean needsScroll) {

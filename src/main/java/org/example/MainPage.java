@@ -50,7 +50,7 @@ public class MainPage {
         element.click();
     }
 
-    public void PushBottomOrderButton() {
+    public void pushBottomOrderButton() {
         WebElement element = driver.findElement(orderButton);
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", element);
     }
