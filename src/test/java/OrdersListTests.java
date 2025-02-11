@@ -62,7 +62,6 @@ public class OrdersListTests extends BaseTest {
 
         PopUpPage popUpPage = new PopUpPage(driver);
         popUpPage.clickOnYes();
-
-        assertTrue(popUpPage.getHeader().contains(orderCompletedHeader));
+        assertTrue(  "Кнопка не найдена на странице!", popUpPage.cancelButtonPresent());
     }
 }

@@ -7,11 +7,13 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
+import java.util.List;
 
 public class PopUpPage {
     WebDriver driver;
     private final By PopUpHeader = By.xpath(".//div[text()='Заказ оформлен']");
-    private final By buttonYes = By.xpath(".//button[@class='Button_Button__ra12g Button_Middle__1CSJM' and text()='Да']");
+    private final By buttonStatus = By.xpath("//*[text()='Посмотреть статус']");
+    ;
 
     public PopUpPage(WebDriver driver) {
 
@@ -20,7 +22,7 @@ public class PopUpPage {
 
     public void clickOnYes() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(buttonYes));
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(buttonStatus));
         element.click();
     }
 
@@ -30,5 +32,12 @@ public class PopUpPage {
                 && !driver.findElement(PopUpHeader).getText().isEmpty()
         ));
         return driver.findElement(PopUpHeader).getText();
+    }
+
+    public boolean cancelButtonPresent()
+    {
+        By buttonLocator = By.xpath("//*[contains(@class, 'Button_Button__ra12g') and contains(@class, 'Button_Middle__1CSJM') and contains(@class, 'Button_Inverted__3IF-i')]");
+        List<WebElement> buttons = driver.findElements(buttonLocator);
+        return !buttons.isEmpty();
     }
 }
